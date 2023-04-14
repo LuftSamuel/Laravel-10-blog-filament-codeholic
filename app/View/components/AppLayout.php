@@ -5,13 +5,13 @@ namespace App\View\Components;
 use App\Models\Categoria;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
+use Illuminate\View\View;
+use Illuminate\Support\Collection;
 
 class AppLayout extends Component
 {
     /**
-     * Create a new component instance.
-     *
-     * @return void
+     * Get the view / contents that represents the component.
      */
     public function __construct(public ?string $metaTitle = null, public ?string $metaDescription = null)
     {
