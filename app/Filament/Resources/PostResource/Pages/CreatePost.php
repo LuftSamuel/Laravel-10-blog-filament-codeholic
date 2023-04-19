@@ -11,9 +11,9 @@ class CreatePost extends CreateRecord
     protected static string $resource = PostResource::class;
 
     protected function mutateFormDataBeforeCreate(array $data): array
-{
-    $data['id_usuario'] = auth()->id();
- 
-    return $data;
-}
+    {
+        $data['id_usuario'] = auth()->id();
+
+        return $data;
+    }
 }
