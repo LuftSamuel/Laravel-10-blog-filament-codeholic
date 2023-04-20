@@ -23,8 +23,8 @@ class UpvoteDownvote extends Component
         $user = request()->user();
 
         if($user){
-            $upvoteDownvote = UpvoteDownvote::where('id_post', '=', $this->post->id)
-            ->where('user_id', '=', $user->id)
+            $upvoteDownvote = \App\Models\UpvoteDownvote::where('id_post', '=', $this->post->id)
+            ->where('id_user', '=', $user->id)
             ->first();
 
             if($upvoteDownvote){
