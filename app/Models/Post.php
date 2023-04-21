@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -9,8 +10,10 @@ use Illuminate\Support\Str;
 class Post extends Model
 {
     use HasFactory;
-    protected $fillable = ['titulo', 'descripcion', 'miniatura', 'post', 'activo', 'publicarse_en',
-     'id_usuario', 'meta_title', 'meta_description'];
+    protected $fillable = [
+        'titulo', 'descripcion', 'miniatura', 'post', 'activo', 'publicarse_en',
+        'id_usuario', 'meta_title', 'meta_description'
+    ];
 
     protected $casts = ['publicarse_en' => 'datetime'];
 
@@ -44,5 +47,18 @@ class Post extends Model
         } else {
             return '/storage/' . $this->miniatura;
         }
+    }
+
+    public function humanReadTime(): Attribute
+    {
+        return new Attribute(
+
+            get: function ($value, $attributes) {
+                $words = Str::wordCount(strip_tags($attributes['post']));
+                $minutes = ceil($words / 200);
+
+                return $minutes . ' ' . str('minute')->plural($minutes) . ', ' . $words . 'words.';
+            }
+        );
     }
 }
