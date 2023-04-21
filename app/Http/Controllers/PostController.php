@@ -81,7 +81,7 @@ class PostController extends Controller
         ->first();
 
         $user = $request->user();
-
+        
         PostView::create([
             'ip_address' => $request->ip(),
             'user_agent' => $request->userAgent(),
