@@ -44,12 +44,12 @@ class CategoriaResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('titulo'),
+                Tables\Columns\TextColumn::make('titulo')->searchable(),
                 // Tables\Columns\TextColumn::make('descripcion'),
                 // Tables\Columns\TextColumn::make('created_at')
                 //     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                    ->dateTime()->sortable(),
             ])
             ->filters([
                 //

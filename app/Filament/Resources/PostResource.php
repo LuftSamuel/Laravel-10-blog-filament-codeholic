@@ -83,22 +83,22 @@ class PostResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('miniatura'),
-                Tables\Columns\TextColumn::make('titulo'),
+                Tables\Columns\TextColumn::make('titulo')->searchable(['titulo', 'post'])->sortable(),
                 Tables\Columns\IconColumn::make('activo')
-                    ->boolean(),
+                    ->boolean()->sortable(),
                 Tables\Columns\TextColumn::make('publicarse_en')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('nombre'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                    ->dateTime()->sortable(),
+                // Tables\Columns\TextColumn::make('nombre'),
+                // Tables\Columns\TextColumn::make('created_at')
+                //     ->dateTime(),
+                // Tables\Columns\TextColumn::make('updated_at')
+                //     ->dateTime(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
