@@ -30,9 +30,9 @@ class Post extends Model
         return $this->belongsToMany(Categoria::class, 'categoria_post', 'id_post', 'id_categoria');
     }
 
-    public function shortBody(): string
+    public function shortBody($words = 30): string
     {
-        return Str::words(strip_tags($this->post), 30);
+        return Str::words(strip_tags($this->post), $words);
     }
 
     public function fechaFormateada(): string
