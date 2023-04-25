@@ -1,7 +1,7 @@
 <x-app-layout :meta-title="$post->meta_title ?: $post->titulo" :meta-description="$post->meta_description">
 
     <!-- Post Section -->
-    <section class="w-full md:w-2/3 flex flex-col items-center px-3">
+    <section class="w-full md:w-2/3 flex flex-col px-3">
 
         <article class="flex flex-col shadow my-4">
             <!-- Article Image -->
@@ -79,6 +79,7 @@
             </div>
         </div> --}}
 
+        <livewire:comments :post="$post"/>
     </section>
 
     {{-- desplegar el componente sidebar --}}
