@@ -9,18 +9,18 @@
         </div>
         <div>
             <div>
-                <a href="" class="font-semibold ring-indigo-600">John Smith</a>
+                <a href="" class="font-semibold ring-indigo-600"> {{$comment->user->name}} </a>
                 - {{ $comment->updated_at->diffForHumans() }}
             </div>
             <div class="text-gray-700">
                 {{ $comment->comment }}
             </div>
             <div>
+                <a href="" class="text-sm ring-indigo-600 mr-3">Reply</a>
                 @if(\Illuminate\Support\Facades\Auth::id() == $comment->id_user)
                     <a href="" class="text-sm ring-blue-600 mr-3">Edit</a>
-                    <a href="" class="text-sm ring-red-600 mr-3">Delete</a>
+                    <a wire:click.prevent="deleteComment" href="" class="text-sm text-red-600">Delete</a>
                 @endif
-                <a href="" class="text-sm ring-indigo-600">Reply</a>
             </div>
         </div>
     </div>

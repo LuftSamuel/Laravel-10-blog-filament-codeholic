@@ -1,7 +1,12 @@
 <div>
     <div x-data="{
-        focused: false
-    }">
+        focused: false,
+        init() {
+            $wire.on('commentCreated', () => {
+                this.focused = false;
+            })
+        }
+    }" class="mb-4">
 
         <div class="mb-2">
             <textarea wire:model="comment" @click="focused = true" placeholder="Leave a comment" :rows="focused ? '3' : '1'"

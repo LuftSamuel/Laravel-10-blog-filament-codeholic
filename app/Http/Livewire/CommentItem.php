@@ -17,4 +17,13 @@ class CommentItem extends Component
     {
         return view('livewire.comment-item');
     }
+
+    public function deleteComment()
+    {
+        $id = $this->comment->id;
+        $this->comment->delete();
+        $this->emitUp('commentDeleted', $id);
+    }
+
+
 }
