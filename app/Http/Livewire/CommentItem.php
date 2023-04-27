@@ -9,7 +9,18 @@ class CommentItem extends Component
 {
     public Comment $comment;
 
-    public function mount(Comment $comment){
+    public bool $editing = false;
+
+    public bool $replying = false;
+
+    protected $listeners = [
+        'cancelEditing' => 'cancelEditing',
+        'commentUpdated' => 'commentUpdated',
+        'commentCreated' => 'commentCreated'
+    ];
+
+    public function mount(Comment $comment)
+    {
         $this->comment = $comment;
     }
 
@@ -20,10 +31,45 @@ class CommentItem extends Component
 
     public function deleteComment()
     {
+        $user = auth()->user();
+        if (!$user) {
+            return redirect(route('login'));
+        }
+
         $id = $this->comment->id;
+
+        if ($this->comment->id_user != $user->id) {
+            return response('', 403);
+        }
+
         $this->comment->delete();
         $this->emitUp('commentDeleted', $id);
     }
 
+    public function startCommentEdit()
+    {
+        $this->editing = true;
+    }
 
+    public function cancelEditing()
+    {
+        $this->editing = false;
+        $this->replying = false;
+
+    }
+
+    public function commentUpdated()
+    {
+        $this->editing = false;
+    }
+
+    public function startReply()
+    {
+        $this->replying = true;
+    }
+
+    public function commentCreated()
+    {
+        $this->replying = false;
+    }
 }
