@@ -1,6 +1,5 @@
 <x-app-layout :meta-title="'Blog de programacion - Posts en categoria ' . $categoria->titulo" meta-description="Blog de programacion web">
-
-
+<div class="flex">
     <!-- Posts Section -->
     <section class="w-full md:w-2/3 flex flex-col items-center px-3">
 
@@ -22,5 +21,6 @@
     <x-sidebar />
 
 
+</div>
 
 </x-app-layout>
