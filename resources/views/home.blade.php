@@ -9,7 +9,9 @@
                 <h2 class="text-lg sm:text-xl font-bold text-blue-500 uppercase pb-1 border-b-2 border-blue-500 mb-3">
                     Latest posts
                 </h2>
+                @if($latestPost)
                 <x-post-item :post="$latestPost" />
+                @endif
             </div>
             {{-- Polular 3 --}}
             <div>
