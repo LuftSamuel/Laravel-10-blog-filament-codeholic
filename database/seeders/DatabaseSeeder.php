@@ -43,6 +43,12 @@ class DatabaseSeeder extends Seeder
         $tw->activo = true;
         $tw->save();
 
+        $tw = new TextWidget();
+        $tw->key = 'acerca-de';
+        $tw->titulo = '';
+        $tw->activo = true;
+        $tw->save();
+
         $adminRole = Role::create(['name' => 'admin']);
 
         $adminUser->assignRole($adminRole);
