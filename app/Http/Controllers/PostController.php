@@ -30,7 +30,9 @@ class PostController extends Controller
             ->first();
 
         //3 most popular based on upvotes
-        DB::statement("SET SQL_MODE=''");
+        //con esto arreglaba lo del group by, pero en vez de hacerlo asi
+        //lo arregle en el group by para evitar problemas al subirlo al servidor
+        // DB::statement("SET SQL_MODE=''");
         $popular3Posts = Post::query()
             ->leftJoin('upvote_downvotes', 'posts.id', '=', 'upvote_downvotes.id_post')
             ->select('posts.*', DB::raw('COUNT(upvote_downvotes.id) as upvote_count'))
@@ -40,7 +42,20 @@ class PostController extends Controller
             ->where('activo', '=', 1)
             ->whereDate('publicarse_en', '<', Carbon::now())
             ->orderByDesc('upvote_count')
-            ->groupBy('posts.id')
+            ->groupBy([
+                'posts.id',
+                'posts.titulo',
+                'posts.descripcion',
+                'posts.miniatura',
+                'posts.post',
+                'posts.activo',
+                'posts.publicarse_en',
+                'posts.id_usuario',
+                'posts.created_at',
+                'posts.updated_at',
+                'posts.meta_title',
+                'posts.meta_description'
+            ])
             ->limit(6)
             ->get();
 
@@ -73,7 +88,21 @@ class PostController extends Controller
                 ->where('activo', '=', 1)
                 ->whereDate('publicarse_en', '<', Carbon::now())
                 ->orderByDesc('views_count')
-                ->groupBy('posts.id')
+                ->groupBy([
+                    'posts.id',
+                    'posts.titulo',
+                    'posts.descripcion',
+                    'posts.miniatura',
+                    'posts.post',
+                    'posts.activo',
+                    'posts.publicarse_en',
+                    'posts.id_usuario',
+                    'posts.created_at',
+                    'posts.updated_at',
+                    'posts.meta_title',
+                    'posts.meta_description'
+                ])
+                ->limit(6)
                 ->limit(3)
                 ->get();
         }
@@ -87,7 +116,13 @@ class PostController extends Controller
         ->leftJoin('categoria_post', 'categorias.id', '=', 'categoria_post.id_categoria')
         ->leftJoin('posts', 'posts.id', '=', 'categoria_post.id_post')
         ->orderByDesc('max_date')
-        ->groupBy('categorias.id')
+        ->groupBy([
+            'categorias.id',
+            'categorias.titulo',
+            'categorias.descripcion',
+            'categorias.created_at',
+            'categorias.updated_at',
+        ])
         ->limit(5)
         ->get();
         

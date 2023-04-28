@@ -25,11 +25,17 @@ class AppLayout extends Component
      */
     public function render()
     {
-        DB::statement("SET SQL_MODE=''");
+        // DB::statement("SET SQL_MODE=''");
         $categorias = Categoria::query()
         ->join('categoria_post', 'categorias.id', '=', 'categoria_post.id_categoria')
         ->select('categorias.titulo', 'categorias.descripcion', DB::raw('count(*) as total'))
-        ->groupBy('categorias.id')
+        ->groupBy([
+            // 'categorias.id',
+            'categorias.titulo',
+            'categorias.descripcion',
+            // 'categorias.created_at',
+            // 'categorias.updated_at',
+        ])
         ->orderByDesc('total')
         ->limit(5)
         ->get();

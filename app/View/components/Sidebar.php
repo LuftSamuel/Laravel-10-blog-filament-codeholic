@@ -29,7 +29,7 @@ class Sidebar extends Component
         $categorias = Categoria::query()
         ->join('categoria_post', 'categorias.id', '=', 'categoria_post.id_categoria')
         ->select('categorias.titulo', 'categorias.descripcion', DB::raw('count(*) as total'))
-        ->groupBy('categorias.id')
+        ->groupBy('categorias.titulo', 'categorias.descripcion')
         ->orderByDesc('total')
         ->get();
 
