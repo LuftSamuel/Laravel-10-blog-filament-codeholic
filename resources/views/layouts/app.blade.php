@@ -12,8 +12,6 @@
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet"> --}}
     <style>
         @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
-
-        
     </style>
 
     <!-- AlpineJS -->
@@ -92,8 +90,15 @@
                         class="hover:bg-blue-600 hover:text-white rounded py-2 px-4 mx-2">Acerca de</a>
                 </div>
 
+                <div class="flex items-center">
 
-                <div>
+                <form method="get" action="{{route('search')}}">
+                    <input name="query" value="{{ request()->get('query') }}" placeholder="Global search"
+                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset
+                    ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600
+                    sm:text-sm sm:leading-6"></textarea>
+                </form>
+
                     @auth
                         <!-- Settings Dropdown -->
                         <div class="flex sm:items-center sm:ml-6">
@@ -146,7 +151,11 @@
     </nav>
 
 
-    <div class="container mx-auto flex flex-wrap py-6">
+    <div class="container mx-auto py-6">
+
+        {{-- <div class="mx-auto max-w-4xl p-3"> --}}
+            
+        {{-- </div> --}}
 
         <!-- Posts Section -->
         {{ $slot }}
@@ -210,7 +219,7 @@
         }
     </script> --}}
 
-    @livewireScripts    
+    @livewireScripts
 </body>
 
 </html>

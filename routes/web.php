@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::get('/acerca', [MainController::class, 'acerca_de'])->name('acerca');
+Route::get('/search', [PostController::class, 'search'])->name('search');
 Route::get('/', [PostController::class, 'home'])->name('home');
 Route::get('/categoria/{categoria:descripcion}', [PostController::class, 'porCategoria'])->name('por-categoria');
 Route::get('/{post:descripcion}', [PostController::class, 'show'])->name('view');
